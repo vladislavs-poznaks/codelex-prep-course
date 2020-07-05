@@ -73,7 +73,7 @@ export class Game {
     this.configuration.level++;
     if (this.configuration.level < MAX_LEVEL) {
       this.configuration.speed -= 7;
-      this.grid.seed();
+      this.grid.seed(this.snake.getHead(), this.snake.getTail());
     } else {
       this.win();
     }

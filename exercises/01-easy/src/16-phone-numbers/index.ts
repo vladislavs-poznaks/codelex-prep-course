@@ -28,10 +28,28 @@
  */
 
 class PhoneNumber {
-  constructor(input: string) {}
+  cleanNmb: string;
+
+  constructor(input: string) {
+    this.cleanNmb = input;
+  }
 
   number() {
-    return "";
+    this.cleanNmb = this.cleanNmb.replace(/[^0-9]/gi, '');
+    //Invalid length check
+    if (this.cleanNmb.length < 10 || this.cleanNmb.length > 11) {return null;}
+    //Country code check
+    if (this.cleanNmb.length === 11 && this.cleanNmb.charAt(0) !== '1') {return null;}
+    else if (this.cleanNmb.length === 11 && this.cleanNmb.charAt(0) === '1') {
+      this.cleanNmb = this.cleanNmb.substr(1, this.cleanNmb.length - 1);
+    }
+    //N check
+    if (parseInt(this.cleanNmb.charAt(0)) >= 2 && parseInt(this.cleanNmb.charAt(3)) >= 2) {
+      return this.cleanNmb;
+    } else {
+      return null;
+    }
+
   }
 }
 

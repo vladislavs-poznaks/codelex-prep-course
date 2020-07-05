@@ -2,8 +2,8 @@ export {};
 
 function Circle(radius) {
   this.radius = radius;
-  this.area = function() {};
-  this.perimeter = function() {};
+  this.area = function() {return Math.PI * radius * radius};
+  this.perimeter = function() {return 2 * Math.PI * radius};
 }
 
 const c = new Circle(3);

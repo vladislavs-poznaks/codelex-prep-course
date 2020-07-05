@@ -36,9 +36,36 @@
 
 class Matrix {
   constructor(private matrix: string) {}
+  
+  
+
 
   get rows() {
-    return [];
+    let lines: string[] = this.matrix
+      .trim()
+      .split(/[\r\n]+/);
+    
+    let rowsStrings: string[][] = [];
+    let rowNumbers: number[] = []
+    let rowsNumbers = [];
+
+    for (let i = 0; i < lines.length; i++) {
+      for (let x = 0; x < lines[i].length; x++) {
+        rowsStrings[i] = lines[i].split(/[ ]/);
+      }
+    }
+
+    for (let i = 0; i < rowsStrings.length; i++) {
+      for (let x = 0; x < rowsStrings[i].length; x++) {
+        rowNumbers[x] = parseInt(rowsStrings[i][x]);
+      }
+
+      //console.log("RowNumbers: " + rowNumbers);
+      rowsNumbers[i] = rowNumbers;
+    }
+    
+    //console.log(rowsNumbers);
+    return rowsNumbers;
   }
 
   get columns() {

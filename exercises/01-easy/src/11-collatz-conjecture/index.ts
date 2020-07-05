@@ -22,6 +22,31 @@
  * Resulting in 9 steps. So for input n = 12, the return value would be 9.
  */
 
-function steps(n: number) {}
+function steps(n: number) {
+    
+    var steps: number = 0;
+
+    // Kā var pārbaudīt vai ir pozitīvs Integer?!
+    if (n <= 0) {
+        //console.log("Error detected!");
+        throw 'Only positive numbers are allowed';
+    }
+
+    while (n !== 1) {
+
+        steps++;
+
+        if (n % 2 === 0) {
+            n = n / 2;
+        } else {
+            n = 3 * n + 1;
+        }
+
+    }
+
+    //console.log("Step: " + steps + " and number: " + n);
+    return steps;
+
+}
 
 export { steps };

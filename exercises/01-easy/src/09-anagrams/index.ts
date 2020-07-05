@@ -12,6 +12,34 @@
  * anagrams('Hi there', 'Bye there') === false
  */
 
-function anagrams(stringA: string, stringB: string) {}
+function anagrams(stringA: string, stringB: string) {
+
+    stringA = stringA.replace(/[^0-9a-z]/gi, '').toLowerCase();
+    stringB = stringB.replace(/[^0-9a-z]/gi, '').toLowerCase();
+
+    if (stringA.length !== stringB.length || stringA === null || stringB === null) {return false;}
+
+    var checkChar = '';
+    var charCount = 0;
+
+    for (var i = 0; i < stringA.length; i++) {
+
+        checkChar = stringA.charAt(i);
+        charCount = 0;
+
+        for (var m = 0; m < stringA.length; m++) {
+            if (checkChar === stringA.charAt(m)) {charCount++}
+        }
+
+        for (var n = 0; n < stringB.length; n++) {
+            if (checkChar === stringB.charAt(n)) {charCount--}
+        }
+
+        if (charCount !== 0 ) {return false;}
+
+    }
+
+    return true;
+}
 
 export { anagrams };

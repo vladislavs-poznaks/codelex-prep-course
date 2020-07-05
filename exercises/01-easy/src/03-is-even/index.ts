@@ -10,6 +10,12 @@
  * isEven(3) === false
  */
 
-function isEven(n: number) {}
+function isEven(n: number) {
+    if ((n & 1) == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 export { isEven };

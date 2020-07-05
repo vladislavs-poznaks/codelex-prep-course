@@ -11,6 +11,20 @@
  * capitalize('look, it is working!') === 'Look, It Is Working!'
  */
 
-function capitalize(str: string) {}
+function capitalize(str: string) {
+    var words = str.split(/[^a-z']/i);
+    var wordsCapital = [];
+    var output: string = str;
+    
+    for (var i = 0; i < words.length; i++) {
+        
+        wordsCapital[i] = words[i].substr(0,1).toUpperCase().concat(words[i].substr(1,words[i].length - 1));
+        //console.log(wordsCapital[i]);
+        output = output.replace(words[i], wordsCapital[i]);
+    }
+
+    return output;
+
+}
 
 export { capitalize };

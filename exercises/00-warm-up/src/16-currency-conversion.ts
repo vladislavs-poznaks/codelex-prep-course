@@ -10,14 +10,23 @@ export {};
  */
 
 // You are allowed to change this function
-function convertToUSD(price) {}
+function convertToUSD(price) {
+    return price * 1.40;
+}
 // You are allowed to change this function
-function convertToBRL(price) {}
+function convertToBRL(price) {
+    return price * 6.72;
+}
+
+// Kā ar DRY?!
+function foreignTrans (price) {
+    return (price * 1.01).toFixed(2);
+}
 
 const product = "You don't know JS";
 const price = 12.5;
-const priceInUSD = convertToUSD(price);
-const priceInBRL = convertToBRL(price);
+const priceInUSD = foreignTrans(convertToUSD(price));
+const priceInBRL = foreignTrans(convertToBRL(price));
 
 console.log("Product: " + product);
 console.log("Price: $" + priceInUSD);

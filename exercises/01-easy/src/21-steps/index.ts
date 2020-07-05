@@ -19,6 +19,26 @@
  *            '####'
  */
 
-function steps(n: number) {}
+function steps(n: number) {
+    if (n <= 0) {
+        //console.log("Error detected!");
+        throw 'Only positive numbers are allowed';
+    }
+
+    for (var row = 0; row < n; row++) {
+        let level: string = '';
+
+        for (var col = 0; col < n; col++) {
+            if (col <= row) {
+                level += '#';
+            } else {
+                level += ' ';
+            }
+        }
+
+        console.log(level);
+
+    }
+}
 
 export { steps };

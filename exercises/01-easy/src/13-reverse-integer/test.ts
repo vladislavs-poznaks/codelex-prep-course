@@ -6,5 +6,6 @@ describe("Reverse function", () => {
     expect(reverse(2394)).toEqual(4932);
     expect(reverse(-200)).toEqual(-2);
     expect(reverse(-324)).toEqual(-423);
+    expect(reverse(5050)).toEqual(505);
   });
 });

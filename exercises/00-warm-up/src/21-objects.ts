@@ -28,10 +28,19 @@ const writers = [
     alive: false
   },
   {
-    firstName: "bell",
-    lastName: "hooks",
+    firstName: "Bell",
+    lastName: "Hooks",
     occupation: "writer",
     age: 64,
     alive: true
   }
 ];
+
+var i;
+for (i=0; i<writers.length; i++) {
+  if (writers[i].alive === true) {
+    console.log("Hi, my name is " + writers[i].firstName + " " + 
+    writers[i].lastName + ". I am " + writers[i].age + 
+    " years old, and work as a " + writers[i].occupation + ".");
+  }
+}

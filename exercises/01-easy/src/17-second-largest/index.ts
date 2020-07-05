@@ -4,6 +4,10 @@
  * Array of numbers are passed in the function, your task is to find the second largest number.
  */
 
-function secondLargest(array: number[]) {}
+function secondLargest(array: number[]) {
+    
+    array = array.sort(function(a, b){return b-a});
+    return array[1];
+}
 
 export { secondLargest };

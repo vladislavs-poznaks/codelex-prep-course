@@ -18,7 +18,17 @@ const library = [
   }
 ];
 
-const showStatus = () => {};
+const showStatus = (arr) => {
+  
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].isRead === true) {
+      console.log("Already read " + arr[i].title + " by " + arr[i].author + ".");
+    } else {
+      console.log("You still need to read " + arr[i].title + " by " + arr[i].author + ".");
+    }
+  }
+
+};
 
 showStatus(library);
 
