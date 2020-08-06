@@ -32,7 +32,9 @@ export class Grid {
         horCoor = Math.floor(Math.random() * this.cellsHor);
         verCoor = Math.floor(Math.random() * this.cellsVer);
       } while ((head.x === horCoor && head.y === verCoor) 
-      || tail.some(part => part.x === horCoor && part.y === verCoor)) // Should check if not on snake or on existing apple
+      || tail.some(part => part.x === horCoor && part.y === verCoor 
+      || this.apples.some(apple => apple.x === horCoor && apple.y === verCoor)))
+      // Should check if not on snake or on existing apple
         
       this.apples.push(new Cell(horCoor, verCoor));
     }

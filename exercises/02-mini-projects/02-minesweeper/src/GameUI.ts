@@ -40,6 +40,11 @@ const elementById = (id: string) => document.getElementById(id) as HTMLElement;
 class GameUI {
   private minesweeper: Minesweeper;
   private isMenuOpen: boolean = false;
+  // VP Changes
+  private timer: number = 0;
+  private isCounterRunning: boolean = false;
+  private isCounterReset: boolean = false;
+
   private windowWrapperOuter = elementById("window-wrapper-outer");
   private resetButton = elementById("minesweeper-reset-button");
   private menuLink = elementById("menu-link");
@@ -62,6 +67,9 @@ class GameUI {
     this.resetButton.addEventListener("mouseup", () => {
       this.resetButton.className = "face-smile";
       this.minesweeper.reset();
+      // VP Changes
+      clearInterval(this.timer);
+      this.isCounterReset = true;
       this.draw();
     });
     document.body.addEventListener("click", () => {
@@ -77,6 +85,9 @@ class GameUI {
     });
     this.menuNew.addEventListener("click", () => {
       this.minesweeper.reset();
+      // VP Changes
+      clearInterval(this.timer);
+      this.isCounterReset = true;
       this.draw();
     });
     this.menuBeginner.addEventListener("click", () => {
@@ -98,14 +109,20 @@ class GameUI {
   }
 
   start() {
-    const windowWrapperOuter = elementById("window-wrapper-outer");
-    windowWrapperOuter.style.width =
-      cellWidth * this.minesweeper.columnsCount() + 27 + "px";
+    // Sets width only on first run...
+    // const windowWrapperOuter = elementById("window-wrapper-outer");
+    // windowWrapperOuter.style.width =
+    //   cellWidth * this.minesweeper.columnsCount() + 28 + "px";
+
     this.draw();
     elementById("game").style.display = "block";
   }
 
   draw() {
+    // Otherwise does not correct width when level changes
+    const windowWrapperOuter = elementById("window-wrapper-outer");
+    windowWrapperOuter.style.width = cellWidth * this.minesweeper.columnsCount() + 28 + "px";
+    
     const minefield = elementById("minefield");
     minefield.innerHTML = "";
     this.minesweeper
@@ -152,7 +169,24 @@ class GameUI {
     };
 
     fillCounter("mine-count", this.minesweeper.minesLeftCount());
-    fillCounter("timer", this.minesweeper.timePassed());
+    // VP Changes
+    if (!this.isCounterRunning) {
+      let seconds: number;
+      if (this.minesweeper.isCounterOn()) {
+        seconds = 0;
+        this.isCounterRunning = true;
+        this.timer = setInterval(function () {
+          seconds++;
+          fillCounter("timer", seconds);
+        } ,1000);
+      }
+    } else if (this.isCounterReset) {
+      this.isCounterReset = false;
+      this.isCounterRunning = false;
+      fillCounter("timer", 0);
+    } else if (this.minesweeper.isLost() || this.minesweeper.isWon()) {
+      clearInterval(this.timer);
+    }
   }
 
   drawMenu() {

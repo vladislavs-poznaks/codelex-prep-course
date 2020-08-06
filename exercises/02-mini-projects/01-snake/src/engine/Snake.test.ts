@@ -22,56 +22,89 @@ describe("Snake", () => {
 
     it("snake should move Down", () => {
         const snake = new Snake()
-
+        
+        snake.move()
         snake.setDirection("Down");
         snake.move();
 
         expect(snake.getDirection()).toBe("Down")
-        expect(snake.getHead()).toEqual(new Cell(2, 1))
-        expect(snake.getTail()).toEqual([new Cell(1, 0), new Cell(2, 0)])
+        expect(snake.getHead()).toEqual(new Cell(3, 1))
+        expect(snake.getTail()).toEqual([new Cell(2, 0), new Cell(3, 0)])
     })
 
     it("snake should move Up", () => {
         const snake = new Snake()
-
+        
+        snake.move();
         snake.setDirection("Up");
         snake.move();
 
         expect(snake.getDirection()).toBe("Up")
-        expect(snake.getHead()).toEqual(new Cell(2, -1))
-        expect(snake.getTail()).toEqual([new Cell(1, 0), new Cell(2, 0)])
+        expect(snake.getHead()).toEqual(new Cell(3, -1))
+        expect(snake.getTail()).toEqual([new Cell(2, 0), new Cell(3, 0)])
     })
 
     it("snake should move Left", () => {
         const snake = new Snake()
 
+        snake.move();
         snake.setDirection("Down");
         snake.move();
         snake.setDirection("Left");
         snake.move();
 
         expect(snake.getDirection()).toBe("Left")
-        expect(snake.getHead()).toEqual(new Cell(1, 1))
-        expect(snake.getTail()).toEqual([new Cell(2, 0), new Cell(2, 1)])
+        expect(snake.getHead()).toEqual(new Cell(2, 1))
+        expect(snake.getTail()).toEqual([new Cell(3, 0), new Cell(3, 1)])
     })
 
     it("snake should not be able to go opposite direction", () => {
         const snake = new Snake()
 
+        snake.move()
         snake.setDirection("Left");
+        snake.move()
         expect(snake.getDirection()).toBe("Right")
-
+        
+        snake.move()
         snake.setDirection("Down");
+        snake.move()
         snake.setDirection("Up");
         expect(snake.getDirection()).toBe("Down")
 
+        snake.move()
         snake.setDirection("Left");
+        snake.move()
         snake.setDirection("Right");
         expect(snake.getDirection()).toBe("Left")
-
+        
+        snake.move()
         snake.setDirection("Up");
+        snake.move()
         snake.setDirection("Down");
         expect(snake.getDirection()).toBe("Up")
+        
+    })
+
+    it("snake should not be able to change direction without a move", () => {
+        const snake = new Snake()
+
+        snake.setDirection("Down");
+        snake.move()
+        snake.setDirection("Up");
+        expect(snake.getDirection()).toBe("Up")
+
+        snake.move()
+        
+        snake.setDirection("Left");
+        snake.setDirection("Down");
+        expect(snake.getDirection()).toBe("Left")
+        
+        snake.move()
+
+        snake.setDirection("Down");
+        snake.setDirection("Right");
+        expect(snake.getDirection()).toBe("Down")
         
     })
 

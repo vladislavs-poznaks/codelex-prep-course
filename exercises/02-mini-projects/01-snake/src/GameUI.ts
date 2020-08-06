@@ -5,6 +5,7 @@ import {
   SPEED
 } from "./engine/Configuration";
 import { Game } from "./engine/Game";
+import { Snake } from "../dist/GameUI.d604de4c";
 
 const CELL_SIZE = 20;
 const SCALE = 2.0;
@@ -13,9 +14,11 @@ class GameUI {
   private canvas: HTMLCanvasElement;
   private game: Game;
 
+
   constructor(canvas: HTMLCanvasElement, game: Game) {
     this.canvas = canvas;
     this.game = game;
+
     requestAnimationFrame(this.draw.bind(this));
 
     window.addEventListener("keydown", this.onKeyDown.bind(this), false);
@@ -170,6 +173,7 @@ class GameUI {
 
   onKeyDown(event: KeyboardEvent) {
     const snake = this.game.getSnake();
+
     switch (event.key) {
       case "ArrowUp":
         event.preventDefault();

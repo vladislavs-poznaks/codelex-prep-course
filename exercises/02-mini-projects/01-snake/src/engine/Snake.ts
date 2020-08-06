@@ -8,13 +8,23 @@ export class Snake {
   private snakeTail: Cell[] = [new Cell(0, 0), new Cell(1, 0)];
   private growCount = 0;
 
+  private lastHeadLogX: number = 2;
+  private lastHeadLogY: number = 0;
+
   setDirection(direction: Direction) {
-    
+    // console.log(`Direction change called.`);
+    // console.log(`Snake head coor: ${this.snakeHead.x}, ${this.snakeHead.y}`);
+
     if (this.snakeDirection === "Right" && direction === "Left") return
     if (this.snakeDirection === "Left" && direction === "Right") return
     if (this.snakeDirection === "Up" && direction === "Down") return
     if (this.snakeDirection === "Down" && direction === "Up") return
-    this.snakeDirection = direction;
+    
+    if (this.lastHeadLogX !== this.getHead().x || this.lastHeadLogY !== this.getHead().y) {
+      this.snakeDirection = direction;
+      this.lastHeadLogX = this.getHead().x;
+      this.lastHeadLogY = this.getHead().y;
+    }
 
   }
 
